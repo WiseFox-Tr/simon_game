@@ -2,15 +2,15 @@
 let buttonColors = ["red", "blue", "green", "yellow"]; 
 let gamePattern = []; 
 let userClickedPattern = []; 
+let isNotStarted = true; 
+let level = 0; 
 
 //each time player hits keyboard
 $("body").keydown(function() {
-    gamePattern.push(nextSequence()); // new color into gamePattern
-    
-    //show sequence to user (flash animation + play sound)
-    let sequenceButton = $("#" + gamePattern[gamePattern.length -1]);
-    sequenceButton.fadeOut(100).fadeIn(100);
-    playSound(sequenceButton.attr("id"));
+    if(isNotStarted) {
+        isNotStarted = !isNotStarted; 
+        nextSequence();
+    }
 });
 
 //detect user clicks, store color of triggered button & play corresponding sound + animate it
@@ -22,12 +22,37 @@ $(".btn").click(function() {
 });
 
 /**
- * generate a random number between 0 & 3
- * @returns a color randomly choosen 
+ * 1- update level and display it
+ * 
+ * 2- generate a random number between 0 & 3 & push color into game pattern
+ * 
+ * 3 - show sequence to user (flash animation + play sound)
  */
 function nextSequence() {
+    //1
+    level++;
+    $("h1").text("Level " + level);
+    //2
     let randomNumber = Math.floor(Math.random() * 4); 
-    return buttonColors[randomNumber]; 
+    gamePattern.push(buttonColors[randomNumber]); 
+    //3
+    let sequenceButton = $("#" + gamePattern[gamePattern.length -1]);
+    sequenceButton.fadeOut(100).fadeIn(100);
+    playSound(sequenceButton.attr("id"));
+}
+
+/**
+ * Animate pressed button by adding & removing a class stylised in css
+ * @param {*string} btnId 
+ */
+ function animatePressedButton(btnId) {
+    $("#" + btnId).addClass("pressed");
+    setTimeout(
+        function() {
+            $("#" + btnId).removeClass("pressed");
+        },
+        100
+    );
 }
 
 /**
@@ -44,18 +69,4 @@ function playSound(idSound) {
         case "wrong" : new Audio("sounds/wrong.mp3").play(); break;      
         default : console.log("Error : idSound received = " + idSound); 
     }
-}
-
-/**
- * Animate pressed button by adding & removing a class stylised in css
- * @param {*string} btnId 
- */
-function animatePressedButton(btnId) {
-    $("#" + btnId).addClass("pressed");
-    setTimeout(
-        function() {
-            $("#" + btnId).removeClass("pressed");
-        },
-        100
-    );
 }
