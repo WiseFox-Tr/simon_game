@@ -7,17 +7,18 @@ let userClickedPattern = [];
 $("body").keydown(function() {
     gamePattern.push(nextSequence()); // new color into gamePattern
     
-    //show sequence to user 
+    //show sequence to user (flash animation + play sound)
     let sequenceButton = $("#" + gamePattern[gamePattern.length -1]);
     sequenceButton.fadeOut(100).fadeIn(100);
     playSound(sequenceButton.attr("id"));
 });
 
-//detect user clicks, store color of button triggered & play corresponding sound 
+//detect user clicks, store color of triggered button & play corresponding sound + animate it
 $(".btn").click(function() {
     let userChosenColor = $(this).attr("id"); 
     userClickedPattern.push(userChosenColor); 
-    playSound(userChosenColor)
+    animatePressedButton(userChosenColor);
+    playSound(userChosenColor);
 });
 
 /**
@@ -43,4 +44,18 @@ function playSound(idSound) {
         case "wrong" : new Audio("sounds/wrong.mp3").play(); break;      
         default : console.log("Error : idSound received = " + idSound); 
     }
+}
+
+/**
+ * Animate pressed button by adding & removing a class stylised in css
+ * @param {*string} btnId 
+ */
+function animatePressedButton(btnId) {
+    $("#" + btnId).addClass("pressed");
+    setTimeout(
+        function() {
+            $("#" + btnId).removeClass("pressed");
+        },
+        100
+    );
 }
