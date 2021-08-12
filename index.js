@@ -1,10 +1,41 @@
-
+//create a new pattern
 let buttonColors = ["red", "blue", "green", "yellow"]; 
-let randomChoosenColor = buttonColors[nextSequence()]; //select a random color
-let gamePattern = []; //store sequence
+let gamePattern = []; 
 
-gamePattern.push(randomChoosenColor);
 
+
+//each time player hits keyboard
+$("body").keydown(function() {
+    gamePattern.push(nextSequence()); // new color into gamePattern
+    
+    //show sequence to user 
+    let sequenceButton = $("#" + gamePattern[gamePattern.length -1]);
+    sequenceButton.fadeOut(100).fadeIn(100);
+    playSound(sequenceButton.attr("id"));
+});
+
+
+/**
+ * generate a random number between 0 & 3
+ * @returns a color randomly choosen 
+ */
 function nextSequence() {
-    return randomNumber = Math.floor(Math.random() * 4); // random nb between 0 & 3
+    let randomNumber = Math.floor(Math.random() * 4); 
+    return buttonColors[randomNumber]; 
+}
+
+/**
+ * play sound corresponding to idSound param
+ * @param {*string} idSound 
+ */
+function playSound(idSound) {
+    console.log("id value --> " + idSound);
+    switch(idSound) {
+        case "blue" : new Audio("sounds/blue.mp3").play(); break;
+        case "green" : new Audio("sounds/green.mp3").play(); break;    
+        case "red" : new Audio("sounds/red.mp3").play(); break;    
+        case "yellow" : new Audio("sounds/yellow.mp3").play(); break;  
+        case "wrong" : new Audio("sounds/wrong.mp3").play(); break;      
+        default : console.log("Error : idSound received = " + idSound); 
+    }
 }
