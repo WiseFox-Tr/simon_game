@@ -13,11 +13,11 @@ $("body").keydown(function() {
     playSound(sequenceButton.attr("id"));
 });
 
-//detect user clicks & store color of button triggered
+//detect user clicks, store color of button triggered & play corresponding sound 
 $(".btn").click(function() {
-    let userChosenColor = $(this).attr("id"); //store color choose by user
+    let userChosenColor = $(this).attr("id"); 
     userClickedPattern.push(userChosenColor); 
-    console.log(userClickedPattern);
+    playSound(userChosenColor)
 });
 
 /**
