@@ -1,8 +1,7 @@
 //create a new pattern
 let buttonColors = ["red", "blue", "green", "yellow"]; 
 let gamePattern = []; 
-
-
+let userClickedPattern = []; 
 
 //each time player hits keyboard
 $("body").keydown(function() {
@@ -14,6 +13,12 @@ $("body").keydown(function() {
     playSound(sequenceButton.attr("id"));
 });
 
+//detect user clicks & store color of button triggered
+$(".btn").click(function() {
+    let userChosenColor = $(this).attr("id"); //store color choose by user
+    userClickedPattern.push(userChosenColor); 
+    console.log(userClickedPattern);
+});
 
 /**
  * generate a random number between 0 & 3
