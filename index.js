@@ -81,7 +81,7 @@ function animateTitleWithRedBackground() {
  * Control user answer and choose the next step of the game depending on :
  * + the thuth (or not) of user answer
  * + the current sequence checked
- * @param {int} currentLevel
+ * @param {*number} currentLevel
  */
 function checkAnswerAndUpdateGameState(currentLevel) { 
     //if user answer is different to game pattern for the sequence checked -> game over, else -> update sequenceChecked to control the next sequence   
