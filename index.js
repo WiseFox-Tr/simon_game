@@ -100,7 +100,7 @@ function checkAnswerAndUpdateGameState(currentLevel) {
 }
 
 /**
- * play sound corresponding to idSound param
+ * play sound corresponding to id (one button color or wrong case)
  * @param {*string} idSound 
  */
 function playSound(idSound) {
