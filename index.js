@@ -74,7 +74,6 @@ function animateTitleWithRedBackground() {
         },
         300
     );
-    setTimeout(function() {}, 300); 
 }
 
 /**
