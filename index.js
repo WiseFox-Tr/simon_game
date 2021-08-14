@@ -1,4 +1,3 @@
-//create a new pattern
 let buttonColors = ["red", "blue", "green", "yellow"]; 
 let isNotStarted = true; 
 let gamePattern = []; 
