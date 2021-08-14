@@ -14,16 +14,22 @@ $("body").keydown(function() {
     }
 });
 
-//store color of triggered button, play corresponding sound & animate it
-//also call a check answer function to see if user succeed or failed and determine the next step of the game
+/* if game started :
+ * store color of triggered button, play corresponding sound & animate it
+ * also call a check answer function to see if the user succeed or failed and determine the next step of the game
+ * else :
+ * informs the user to press a key by adding a temporary red background to title
+*/
 $(".btn").click(function() {
-    let userChosenColor = $(this).attr("id"); 
-    userClickedPattern.push(userChosenColor); 
-    animatePressedButton(userChosenColor);
-    playSound(userChosenColor);
-
-    //check user's answer and determine what to do next 
-    checkAnswerAndUpdateGameState(level); 
+    if(!isNotStarted) {
+        let userChosenColor = $(this).attr("id"); 
+        userClickedPattern.push(userChosenColor); 
+        animatePressedButton(userChosenColor);
+        playSound(userChosenColor);
+        checkAnswerAndUpdateGameState(level); 
+    } else {
+        animateTitleWithRedBackground();
+    }
 });
 
 /**
@@ -55,6 +61,20 @@ function nextSequence() {
         },
         100
     );
+}
+
+/**
+ * add for 300 miliseconds a red background to title
+ */
+function animateTitleWithRedBackground() {
+    $("h1").addClass("red");
+    setTimeout(
+        function() {
+            $("h1").removeClass("red");
+        },
+        300
+    );
+    setTimeout(function() {}, 300); 
 }
 
 /**
