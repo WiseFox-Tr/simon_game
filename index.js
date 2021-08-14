@@ -95,7 +95,7 @@ function checkAnswerAndUpdateGameState(currentLevel) {
                 userClickedPattern.length = 0; 
                 sequenceChecked = 0; 
             },
-            1000
+            600
         );
     }
 }
