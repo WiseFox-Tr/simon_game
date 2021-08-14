@@ -15,7 +15,7 @@ $("body").keydown(function() {
 });
 
 //store color of triggered button, play corresponding sound & animate it
-//also call check answer function to see if user succeed or failed and update the game state
+//also call a check answer function to see if user succeed or failed and determine the next step of the game
 $(".btn").click(function() {
     let userChosenColor = $(this).attr("id"); 
     userClickedPattern.push(userChosenColor); 
@@ -58,7 +58,7 @@ function nextSequence() {
 }
 
 /**
- * Control user answer and choose the next stage depending on :
+ * Control user answer and choose the next step of the game depending on :
  * + the thuth (or not) of user answer
  * + the current sequence checked
  * @param {int} currentLevel
@@ -108,5 +108,5 @@ function displayGameOver() {
         },
         100
     );
-    $("h1").text("Game over, Press any key to restart the game")
+    $("h1").text("Game over, Press any key to restart the game");
 }
