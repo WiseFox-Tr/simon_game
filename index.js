@@ -65,7 +65,7 @@ function nextSequence() {
  */
 function checkAnswerAndUpdateGameState(currentLevel) { 
     //if user answer is different to game pattern for the sequence checked -> game over, else -> update sequenceChecked to control the next sequence   
-    gamePattern[sequenceChecked] === userClickedPattern[sequenceChecked] ? sequenceChecked++ : displayGameOver(); 
+    gamePattern[sequenceChecked] === userClickedPattern[sequenceChecked] ? sequenceChecked++ : gameOver(); 
 
     //if all user click's pattern is valid -> start new sequence + reset control values
     if(sequenceChecked === currentLevel) {
@@ -99,7 +99,7 @@ function playSound(idSound) {
  * play wrong sound and launch gameOver animation
  * also update title 
  */
-function displayGameOver() {
+function gameOver() {
     playSound("wrong");
     $("body").addClass("game-over");
     setTimeout(
@@ -109,4 +109,16 @@ function displayGameOver() {
         100
     );
     $("h1").text("Game over, Press any key to restart the game");
+    restart();
+}
+
+/** 
+ * Reset game's values 
+ */
+function restart() {
+    gamePattern.length = 0; 
+    userClickedPattern.length = 0; 
+    level = 0; 
+    sequenceChecked = 0;
+    isNotStarted = true; 
 }
